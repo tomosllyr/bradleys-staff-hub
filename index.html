@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Bradley's Practice Staff Hub - internal operational knowledge base">
+<title>Bradley’s Practice Staff Hub</title>
+<style>
+:root{
+  --navy:#123b5d;--navy2:#0b2c46;--blue:#1d6f96;--teal:#16857a;--bg:#f4f7f9;
+  --card:#fff;--text:#17212b;--muted:#647482;--line:#dbe4ea;--soft:#edf4f7;
+  --warn:#fff6dc;--warn-border:#c88913;--danger:#fff0f0;--danger-border:#c43c3c;
+  --success:#eaf7f1;--shadow:0 6px 24px rgba(18,59,93,.08);--radius:15px
+}
+*{box-sizing:border-box} html{scroll-behavior:smooth}
+body{margin:0;font:15px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;color:var(--text);background:var(--bg)}
+button,input{font:inherit}.hidden{display:none!important}
+header{background:linear-gradient(120deg,var(--navy2),var(--navy));color:#fff;position:sticky;top:0;z-index:20;box-shadow:0 2px 12px #0002}
+.top{max-width:1280px;margin:auto;padding:14px 22px;display:flex;gap:18px;align-items:center}
+.brand{display:flex;align-items:center;gap:12px;min-width:270px;cursor:pointer}
+.logo{width:45px;height:45px;border-radius:12px;background:#fff;color:var(--navy);display:grid;place-items:center;font-weight:900;font-size:21px}
+.brand strong{font-size:18px}.brand small{display:block;color:#dce9f2}
+nav{display:flex;gap:5px;flex-wrap:wrap;margin-left:auto}
+nav button{border:0;background:transparent;color:#e9f2f7;padding:8px 10px;border-radius:9px;cursor:pointer}
+nav button:hover,nav button.active{background:#ffffff18;color:#fff}
+main{max-width:1180px;margin:auto;padding:28px 22px 70px}
+.notice{background:#eaf2f6;border:1px solid #cbdde7;border-radius:10px;padding:9px 13px;color:#365568;font-size:13px;margin-bottom:22px}
+.hero{padding:22px 0 12px}.eyebrow{text-transform:uppercase;letter-spacing:.09em;font-size:12px;font-weight:800;color:var(--blue)}
+h1{font-size:34px;line-height:1.15;margin:6px 0 8px;color:var(--navy2)}h2{font-size:24px;color:var(--navy2);margin:28px 0 12px}
+h3{font-size:17px;color:var(--navy);margin:0 0 6px}p{margin:7px 0 12px}.lead{font-size:18px;color:#506573;max-width:760px}
+.search-wrap{background:var(--card);padding:20px;border-radius:var(--radius);box-shadow:var(--shadow);margin:18px 0 24px}
+.search-row{display:flex;gap:10px}.search-row input{flex:1;border:2px solid #b8ccd8;border-radius:11px;padding:13px 15px;outline:none}
+.search-row input:focus{border-color:var(--blue);box-shadow:0 0 0 3px #1d6f9618}
+.btn{border:0;border-radius:10px;padding:11px 15px;background:var(--navy);color:#fff;font-weight:700;cursor:pointer;text-decoration:none;display:inline-block}
+.btn:hover{background:var(--navy2)}.btn.secondary{background:#e6eff4;color:var(--navy)}.btn.teal{background:var(--teal)}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}.grid.two{grid-template-columns:repeat(2,1fr)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:18px;box-shadow:0 2px 10px #123b5d0b}
+.click{cursor:pointer;transition:.15s}.click:hover{transform:translateY(-2px);box-shadow:var(--shadow);border-color:#a9c4d2}
+.icon{width:38px;height:38px;border-radius:10px;background:var(--soft);display:grid;place-items:center;color:var(--navy);font-weight:800;margin-bottom:12px}
+.meta{display:flex;gap:7px;flex-wrap:wrap;color:var(--muted);font-size:12px;margin-top:11px}.tag{background:#eef3f6;border-radius:20px;padding:3px 8px}
+.shortcut{display:flex;justify-content:space-between;align-items:center;gap:20px;background:#e8f4f4;border-left:5px solid var(--teal);padding:20px;border-radius:12px;margin:20px 0}
+.resource{display:flex;gap:14px;align-items:flex-start}.resource .icon{flex:0 0 38px}.resource p{color:#526774}
+.section-head{display:flex;justify-content:space-between;align-items:end;gap:20px;margin-bottom:14px}
+.back{border:0;background:none;color:var(--blue);font-weight:700;padding:0;cursor:pointer;margin-bottom:12px}
+.protocol-head{background:#fff;border-radius:var(--radius);padding:22px;box-shadow:var(--shadow);border-top:5px solid var(--blue)}
+.gov{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:16px}.gov div{background:#f4f7f9;border-radius:8px;padding:8px;font-size:12px}.gov b{display:block;color:#506573}
+.callout{padding:16px 17px;border-radius:11px;margin:16px 0;background:#edf5f8;border-left:4px solid var(--blue)}
+.callout.warn{background:var(--warn);border-color:var(--warn-border)}.callout.danger{background:var(--danger);border-color:var(--danger-border)}
+.steps{display:grid;gap:10px;margin:15px 0}.step{background:#fff;border:1px solid var(--line);border-radius:11px;padding:14px 16px}.step b{color:var(--navy)}
+.choice{display:grid;grid-template-columns:1fr 1fr;gap:12px}.choice>div{border:1px solid var(--line);border-radius:11px;padding:15px;background:#fff}
+.tabs{display:flex;gap:7px;flex-wrap:wrap;margin:15px 0}.tabs button{border:1px solid #bdd0da;background:#fff;color:var(--navy);border-radius:20px;padding:7px 12px;cursor:pointer}.tabs button.active{background:var(--navy);color:#fff}
+details{background:#fff;border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin:9px 0}summary{cursor:pointer;font-weight:700;color:var(--navy)}
+.feedback{margin-top:28px;background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:18px}.feedback .cols{display:grid;grid-template-columns:1fr 1fr;gap:15px}
+.search-results{margin-top:12px;display:grid;gap:8px}.result{padding:12px;border:1px solid var(--line);border-radius:9px;background:#fff;cursor:pointer}.result:hover{border-color:var(--blue)}
+.empty{padding:18px;background:var(--warn);border-radius:10px}
+ul{padding-left:20px}li{margin:5px 0}.muted{color:var(--muted)}
+footer{text-align:center;color:#73838e;padding:25px;font-size:12px}
+@media(max-width:850px){header{position:relative}.top{align-items:flex-start;flex-direction:column}.brand{min-width:0}nav{margin:0}.grid,.grid.two,.choice,.feedback .cols,.gov{grid-template-columns:1fr}.shortcut{align-items:flex-start;flex-direction:column}h1{font-size:29px}}
+</style>
+</head>
+<body>
+<header>
+ <div class="top">
+  <div class="brand" onclick="showPage('home')"><div class="logo">BP</div><div><strong>Bradley’s Practice Staff Hub</strong><small>Mold &amp; Buckley</small></div></div>
+  <nav id="nav"></nav>
+ </div>
+</header>
+<main>
+ <div class="notice"><b>Internal working resource.</b> Content should be checked against the current approved document.</div>
+ <div id="app"></div>
+</main>
+<footer>Bradley’s Practice Staff Hub · Internal operational resource</footer>
+<script>
+const FORM_URL="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=uChWuyjjgkCoVkM8ntyPrh1OqYcKWvRBlYRB8sgp6JhUNFlHR1ZFOVJGMFBTQkhRTVFEOURZUjdJVS4u";
+const navItems=[
+ ["home","Home"],["reception","Reception guide"],["forms","Forms & templates"],
+ ["clinical","Clinical protocols"],["policies","Practice policies"],["admin","Administrative protocols & common queries"],["contacts","Contacts & escalation"]
+];
+const resources=[
+ {id:"death",cat:"policies",type:"Policies",icon:"D",title:"When the practice is informed of a patient’s death",desc:"Workflow for verification, recording, certification and Medical Examiner notification.",owner:"Clinical governance",review:"Review date required",keywords:"death died deceased bereavement medical examiner certification"},
+ {id:"uti",cat:"clinical",type:"Protocols",icon:"U",title:"Suspected urinary tract infection",desc:"Reception, HCA, nurse and clinician workflow for suspected UTI and urine samples.",owner:"Clinical team",review:"Review date required",keywords:"uti urine dysuria urinary infection sample"},
+ {id:"b12",cat:"clinical",type:"Protocols",icon:"B12",title:"Vitamin B12 deficiency treatment",desc:"Simplified investigation, initial treatment, retesting and maintenance pathway.",owner:"Clinical team",review:"Review date required",keywords:"b12 vitamin deficiency injection blood"},
+ {id:"incident",cat:"forms",type:"Forms",icon:"!",title:"Significant event / incident form",desc:"Record an incident, near miss or learning event for review.",owner:"Governance lead",review:"Review Apr 2027",keywords:"significant event incident near miss sea form"},
+ {id:"homevisit",cat:"admin",type:"How-to",icon:"⌂",title:"Home visit request workflow",desc:"Reception and navigation workflow: emergencies, ability to attend, clinician callback and late-day routing.",owner:"Practice team",review:"Review date required",keywords:"home visit housebound cannot come in can't attend visit doctor at home acute illness transport"},
+ {id:"access",cat:"admin",type:"How-to",icon:"A",title:"Patient access and appointment workflow",desc:"Zymego, eConsult Lite, appointment booking, troubleshooting, blood tests and sick notes.",owner:"Practice team",review:"Review date required",keywords:"appointment zymego can't use link cannot use link booking patient can't book econsult blood test sick note no appointment priority clinician"},
+ {id:"capacity",cat:"admin",type:"How-to",icon:"12:30",title:"Afternoon urgent appointment capacity",desc:"Navigation workflow for reviewing and converting excess unfilled urgent appointments at 12:30pm.",owner:"Clinical Admin Team",review:"Review date required",keywords:"urgent appointment capacity afternoon 12:30 convert slots"},
+ {id:"secondary",cat:"admin",type:"How-to",icon:"↔",title:"Secondary care and private provider requests",desc:"Who should prescribe, arrange investigations, chase results or retain responsibility for care.",owner:"Practice team",review:"Review date required",keywords:"hospital wants bloods consultant tests secondary care investigations hospital result chase bloods private doctor prescription private shared care"},
+ {id:"duty",cat:"clinical",type:"Protocol",icon:"5pm",title:"Duty Doctor – 5:00–6:30 pm",desc:"Late-day urgent clinical problems that cannot safely wait until the next working day.",owner:"Clinical team",review:"Review date required",keywords:"duty doctor after 5 late urgent child cancer terminal acute illness"},
+ {id:"medlink",cat:"admin",type:"How-to",icon:"M",title:"Medlink – chronic disease recall & review",desc:"Admin recall, Nurse Recall Triage and completion, further-information and clinical-concern pathways.",owner:"Practice team",review:"Review date required",keywords:"medlink chronic disease review recall birth month nurse admin annual review"},
+ {id:"meds",cat:"admin",type:"How-to",icon:"Rx",title:"Repeat medication review & reauthorisation",desc:"Six-route workflow for repeat medication review, reauthorisation and monitoring.",owner:"Practice team",review:"Review date required",keywords:"medication meds prescription reauthorise reauthorisation repeat review pharmacist monitoring"},
+ {id:"skin",cat:"clinical",type:"Protocol",icon:"S",title:"Skin problems navigation",desc:"Remote management, rash, lesion/mole, Photo Clinic and Consultant Connect pathway.",owner:"Clinical team",review:"Review date required",keywords:"skin rash lesion mole photo clinic dermatology consultant connect"},
+ {id:"diabetes",cat:"clinical",type:"Protocol",icon:"DM",title:"Type 2 diabetes nurse-led medication review",desc:"HbA1c targets, medication escalation, comorbidity considerations and renal adjustments.",owner:"Clinical team",review:"Review date required",keywords:"diabetes type 2 hba1c metformin dapagliflozin ozempic sitagliptin gliclazide mounjaro renal"},
+ {id:"antidepressant",cat:"clinical",type:"Protocol",icon:"AD",title:"Antidepressant initiation & review",desc:"Age-based first review and follow-up pathway after antidepressant initiation or dose increase.",owner:"Clinical team",review:"Review date required",keywords:"antidepressant depression ssri review mental health dose increase"},
+ {id:"mgus",cat:"admin",type:"How-to",icon:"MG",title:"MGUS monitoring",desc:"April/October recall, blood monitoring and annual GP review workflow.",owner:"Practice team",review:"Review date required",keywords:"mgus monoclonal gammopathy april october bloods electrophoresis"},
+ {id:"complaints",cat:"admin",type:"How-to",icon:"C",title:"Complaints & feedback",desc:"De-escalation, line-manager escalation and formal complaint route.",owner:"Management team",review:"Review date required",keywords:"complaint unhappy feedback de-escalate manager formal complaint"},
+ {id:"results",cat:"admin",type:"How-to",icon:"R",title:"Test results",desc:"Operational guidance for responsibility and actioning of practice test results.",owner:"Practice team",review:"Review date required",keywords:"test result blood result action own results"},
+ {id:"safeguarding",cat:"contacts",type:"Contacts",icon:"SG",title:"Safeguarding concern",desc:"Use approved practice safeguarding process and escalation contacts.",owner:"Safeguarding leads",review:"Review date required",keywords:"safeguarding vulnerable child adult concern"},
+ {id:"sickness",cat:"admin",type:"How-to",icon:"S",title:"Staff sickness",desc:"Practice operational guidance for reporting staff sickness.",owner:"Management team",review:"Review date required",keywords:"staff sickness absence sick employee"},
+ {id:"annualleave",cat:"policies",type:"Policies",icon:"AL",title:"Annual leave policy",desc:"Bradley’s Practice annual leave policy.",owner:"Management team",review:"Review date required",keywords:"annual leave holiday staff leave policy"},
+ {id:"systems",cat:"admin",type:"How-to",icon:"IT",title:"Clinical system access",desc:"Operational guidance for requesting clinical-system access.",owner:"Practice team",review:"Review date required",keywords:"emis clinical system access login IT"},
+];
+const receptionTopics=[
+ ["Requesting an appointment","access"],["Cannot use Zymego","access"],["Home visit","homevisit"],["Chronic disease review","medlink"],
+ ["Sick note","access"],["Blood test","access"],["Prescription query","meds"],["Secondary care request","secondary"],
+ ["Private healthcare request","secondary"],["Hospital / secondary-care result","secondary"],["No appointments available","access"],
+ ["Unable to attend offered appointment","access"],["Wants a particular clinician","access"],["Unhappy with appointment priority","access"],
+ ["Refuses recommended A&E / MIU","access"],["Patient does not answer","access"],["Complaints","complaints"],
+ ["Death / bereavement","death"],["Safeguarding concern","safeguarding"],["Urgent problem / escalation","duty"],["Duty Doctor / problem after 5pm","duty"]
+];
+const detail={
+homevisit:`<div class="callout danger"><b>Emergency?</b> Ask: “Do you feel this is an emergency requiring an ambulance?” If yes, follow the existing emergency process / call 999. Suicidal presentation: follow the approved urgent escalation including urgent clinician callback.</div>
+<div class="steps"><div class="step"><b>1 · Collect</b><br>Patient details, caller if different, best contact number and a brief reason for the request.</div>
+<div class="step"><b>2 · Can the patient attend the surgery?</b><br>Establish whether the patient is reasonably able to attend given their current condition and circumstances. They do <b>not</b> need to be permanently housebound. Acute illness or deterioration can temporarily prevent attendance. Lack of transport alone would not normally justify a home visit.</div>
+<div class="step"><b>3 · Reception does not make the final clinical decision.</b><br>If uncertain, pass to a clinician. If the patient is already at the surgery, discuss with the Navigating Clinician rather than processing a home visit.</div>
+<div class="step"><b>4 · Route</b><br>Add an appropriate request to the visiting clinician workflow. The clinician will normally telephone first and decide whether a visit is appropriate. If the visiting clinician has left → Navigating Clinician. After 5pm → Duty Doctor, clearly marked <b>HOME VISIT REQUEST</b>.</div></div>`,
+access:`<div class="choice"><div><h3>Can the patient use the website / Zymego?</h3><b>YES</b><p>Direct them through the website/Zymego flow.</p></div><div><h3>NO</h3><p>Receptionist works through the flow with the patient. If the endpoint requires eConsult, complete eConsult Lite.</p></div></div>
+<div class="callout"><b>Collect:</b> main symptoms; location where relevant; duration; whether a healthcare professional is already aware; desired outcome.</div>
+<details><summary>Appointment troubleshooting</summary><ul><li>No suitable appointment: search matching availability and use the approved escalation route if none.</li><li>Cannot attend on-day appointment: use the approved within-week pathway and safety-net.</li><li>Cannot use Zymego: manually book the same appointment type where appropriate.</li><li>Wants a particular clinician: accommodate if suitable, otherwise explain choice of first suitable appointment with that clinician or an earlier appointment with another.</li><li>Patient does not answer: follow the approved failed-encounter process.</li><li>Unhappy with priority: reception does not independently change clinical priority; record changed/new information and route for clinical review.</li></ul></details>
+<div class="callout danger"><b>Emergency exclusions:</b> follow the current approved Patient Access Policy. Do not use this page to replace the approved emergency criteria.</div>`,
+secondary:`<div class="steps"><div class="step"><b>Ongoing / repeat medication</b><br>May be considered. Add to <b>Prescription Queries</b> for clinician review. Reception must not promise prescribing.</div>
+<div class="step"><b>Acute / one-off medication from a private provider</b><br>Decline; the private provider should prescribe.</div>
+<div class="step"><b>Secondary care asks for additional investigations</b><br>Normally decline; secondary care should arrange within its pathway. Exception: an established locally agreed pathway.</div>
+<div class="step"><b>Private provider asks for investigations</b><br>Decline; the private provider should arrange them.</div>
+<div class="step"><b>Secondary care asks Bradley’s to chase / communicate / action results</b><br>Normally decline. The requesting clinician/service remains responsible for chasing, receiving, actioning, management planning and communication unless responsibility has previously been agreed and accepted.</div>
+<div class="step"><b>Private shared care</b><br>Bradley’s Practice does not enter shared-care agreements with private clinics.</div></div>
+<div class="callout warn"><b>Is there an agreed pathway?</b> Follow it. Do not assume a pathway exists. If unsure, escalate/check rather than automatically accepting or declining.</div>`,
+duty:`<div class="callout"><b>Purpose:</b> urgent clinical problems from 17:00–18:30 that cannot safely wait until the next working day. It should not routinely be used as overflow for unmet demand earlier in the day.</div>
+<div class="grid"><div class="card"><h3>Child</h3><p>New illness.</p></div><div class="card"><h3>Cancer / terminal condition</h3><p>Problem relating to cancer or terminal condition.</p></div><div class="card"><h3>New acute illness</h3><p>Use the exact criterion in the current approved Duty Doctor SOP.</p></div></div>
+<p>The Duty Doctor may telephone-assess first and arrange face-to-face assessment where required. After 5pm, eligible patients are routed to the Duty Doctor telephone list.</p>`,
+medlink:`<div class="callout"><b>High-level flow:</b> Admin manages recalls/invitations/workflow → completed forms go to <b>Nurse Recall Triage</b>.</div>
+<div class="grid"><div class="card"><h3>1 · Review complete</h3><p>All required information available and condition stable/satisfactory → complete review, reauthorise appropriate medication and send completion message.</p></div>
+<div class="card"><h3>2 · More information needed</h3><p>Missing/outdated BP, bloods, patient response or HCA measurements → obtain information efficiently; <b>do not complete yet</b>; reassess.</p></div>
+<div class="card"><h3>3 · Clinical concern</h3><p>Inadequately managed condition, concerning response or red flag → appropriate nurse/GP/other clinical review, prioritise and document.</p></div></div>
+<div class="tabs"><button class="active">Reception</button><button>Nursing Team</button><button>Admin Team</button></div>
+<details><summary>Reception quick reference</summary><p>For annual-review queries, use the approved birth-month/Medlink process. Where a patient cannot complete the electronic form, use the approved nurse/Zymego route.</p></details>
+<details><summary>Monthly admin task</summary><p>Use the approved monthly Medlink CSV workflow. Care-home/housebound and not-invited cases should follow the agreed escalation process.</p></details>`,
+meds:`<div class="steps">${[
+["1 · No routine review required","Appropriate medicines may use the approved extended-issue approach."],
+["2 · Chronic disease medication","Align with birth-month chronic-disease review."],
+["3 · Condition-specific regular review","For example HRT/contraception; align authorisation with the condition-specific review."],
+["4 · Can be reviewed without patient input","Prescription Team → appropriate pharmacist/CD review."],
+["5 · Regular blood monitoring","Use Medlink Monitoring; do not routinely reauthorise."],
+["6 · Everything else","Patient medication review required; normally Medlink Medication Review."]
+].map(x=>`<div class="step"><b>${x[0]}</b><br>${x[1]}</div>`).join("")}</div>
+<div class="callout warn"><b>Outstanding:</b> the source heading for the remote-pharmacist medication list exists, but the agreed list is missing. Do not invent it.</div>`,
+skin:`<div class="steps"><div class="step"><b>eConsult → photos available?</b><br>Assess whether the problem can be diagnosed/managed remotely.</div><div class="step"><b>Remote quick win</b><br>Manage remotely where appropriate.</div><div class="step"><b>Rash</b><br>GP/ANP face-to-face assessment; timeframe according to clinical features.</div><div class="step"><b>Lesion / mole</b><br>Photo Clinic; consider face-to-face assessment if long wait plus concern.</div><div class="step"><b>Diagnostic uncertainty after F2F</b><br>Consultant Connect Teledermatology.</div></div>
+<div class="callout warn"><b>Unresolved source conflict:</b> benign lesion/removal query identifies TW/MD in one place and TW/MD/CB elsewhere. This requires Bradley’s confirmation.</div>`,
+diabetes:`<div class="callout warn"><b>Use the current approved diabetes flowchart for clinical decisions.</b> This hub page is a navigation summary and should not supersede the source document.</div>
+<div class="grid"><div class="card"><h3>Step 1</h3><p>Apply the approved HbA1c target according to age, treatment and frailty.</p></div><div class="card"><h3>Step 2</h3><p>Follow the approved medication escalation sequence.</p></div><div class="card"><h3>Step 3</h3><p>Apply comorbidity considerations for HF, CKD, established CVD, obesity and frailty/hypoglycaemia risk.</p></div></div>
+<p>Use the source protocol for renal dose adjustments, renal monitoring and medication-specific thresholds.</p>`,
+antidepressant:`<div class="choice"><div><h3>Age &gt;25</h3><p>Start antidepressant → first review at <b>2 weeks</b> → subsequent review at <b>4 weeks</b>.</p></div><div><h3>Age ≤25</h3><p>Start antidepressant → first review at <b>1 week</b> → subsequent review at <b>4 weeks</b>.</p></div></div><div class="callout"><b>Dose increase:</b> restart the age-appropriate initiation review pathway. Escalate clinical concern/red flags according to the approved protocol.</div>`,
+mgus:`<div class="steps"><div class="step"><b>April & October</b><br>Recall Clerk searches the MGUS register.</div><div class="step"><b>New patient</b><br>Send the approved MGUS letter.</div><div class="step"><b>Bloods</b><br>FBC, U&amp;E, bone profile, immunoglobulins and serum electrophoresis.</div><div class="step"><b>April</b><br>Book annual GP review. GP uses the <b>MGUS annual review</b> EMIS template and refers where indicated by the approved protocol.</div></div>`,
+uti:`<div class="callout warn"><b>Clinical source required.</b> Use the current approved Bradley’s UTI protocol for the Reception/HCA/Nurse/Clinician pathway and the approved BCUHB/Eolas formulary for antibiotic selection. No antibiotic recommendations are invented here.</div>`,
+b12:`<div class="callout warn"><b>Clinical source required.</b> Follow the current approved Bradley’s B12 algorithm for investigation, initial treatment, retesting and maintenance. This HTML does not independently alter the clinical pathway.</div>`,
+death:`<div class="callout"><b>Operational principle:</b> follow the current approved Bradley’s death-notification workflow for verification, recording, certification and Medical Examiner notification.</div><p>This page should remain concise and role-based. Use the approved North Wales Medical Examiner QAP Notification of Cause of Death form where applicable.</p>`,
+capacity:`<div class="callout"><b>12:30 workflow</b><br>Use the current approved Clinical Admin Team process for reviewing and converting excess unfilled urgent appointments. Thresholds are intentionally not recreated without the approved source.</div>`,
+complaints:`<div class="steps"><div class="step"><b>1 · De-escalate</b><br>Respond calmly and try to resolve the immediate practical issue where appropriate.</div><div class="step"><b>2 · Escalate</b><br>Pass to the relevant line manager where needed.</div><div class="step"><b>3 · Formal complaint</b><br>Use the practice’s approved formal complaint route.</div></div>`,
+results:`<div class="callout"><b>Practice workflow:</b> clinicians action their own results. Follow the current approved practice process for exceptions/escalation.</div>`,
+incident:`<div class="callout"><b>Use the approved Significant Event / Incident Form</b> to record incidents, near misses or learning events for governance review.</div>`,
+safeguarding:`<div class="callout danger"><b>Safeguarding concern</b><br>Follow the current approved practice safeguarding process and escalation contacts. Do not rely on this summary for contact details or clinical thresholds.</div>`,
+sickness:`<div class="callout"><b>Staff sickness</b><br>Follow the current approved Bradley’s operational process for reporting sickness/absence.</div>`,
+annualleave:`<div class="callout"><b>Practice policy</b><br>Refer to the current approved Bradley’s Practice Annual Leave Policy.</div>`,
+systems:`<div class="callout"><b>Clinical-system access</b><br>Follow the approved operational process for requesting access. Escalate uncertainty to the appropriate manager.</div>`
+};
+function esc(s){return String(s).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]))}
+function normalize(s){return s.toLowerCase().replace(/[’']/g,"").replace(/[^a-z0-9 ]/g," ").replace(/\s+/g," ").trim()}
+const synonyms={
+ "cant use link":"zymego booking link patient cant book cannot use zymego",
+ "cannot use link":"zymego booking link patient cant book",
+ "hospital wants bloods":"secondary care consultant investigations tests",
+ "consultant wants tests":"secondary care investigations hospital bloods",
+ "hospital result":"secondary care result chase hospital bloods",
+ "chase hospital bloods":"secondary care result consultant chase",
+ "patient cant come in":"home visit unable attend acute illness",
+ "after 5":"duty doctor late urgent",
+ "meds":"medication prescription"
+};
+function search(q){
+ let nq=normalize(q); if(!nq)return[];
+ for(const [k,v] of Object.entries(synonyms)) if(nq.includes(k)) nq+=" "+v;
+ const terms=nq.split(" ").filter(x=>x.length>1);
+ return resources.map(r=>{const hay=normalize(r.title+" "+r.desc+" "+r.keywords+" "+r.type);let score=0;terms.forEach(t=>{if(hay.includes(t))score+=2;if(normalize(r.title).includes(t))score+=2});if(hay.includes(nq))score+=8;return [r,score]}).filter(x=>x[1]>0).sort((a,b)=>b[1]-a[1]).map(x=>x[0]).slice(0,10);
+}
+function resourceCard(r){return `<div class="card click resource" onclick="openResource('${r.id}')"><div class="icon">${r.icon}</div><div><h3>${r.title}</h3><p>${r.desc}</p><div class="meta"><span class="tag">${r.type}</span><span>${r.owner}</span><span>${r.review}</span></div></div></div>`}
+function setNav(id){document.querySelectorAll("#nav button").forEach(b=>b.classList.toggle("active",b.dataset.id===id))}
+function feedback(){return `<div class="feedback"><h3>Can’t find what you need?</h3><div class="cols"><div><b>Need an answer now?</b><p>If the guidance above doesn’t answer your question, speak to your Team Manager. For an immediate clinical query, speak to the Navigating Clinician or Duty Doctor after 5pm where appropriate.</p></div><div><b>The Staff Hub should have answered this</b><p>Tell us what was missing, unclear or out of date.</p><a class="btn teal" href="${FORM_URL}" target="_blank" rel="noopener">Tell us what’s missing</a></div></div></div>`}
+function showPage(id){
+ setNav(id); window.scrollTo(0,0);
+ if(id==="home")return renderHome();
+ if(id==="reception")return renderReception();
+ if(id==="contacts")return renderList("Contacts & escalation","Who to contact and when.",resources.filter(r=>r.cat==="contacts"||["duty","complaints"].includes(r.id)));
+ const map={forms:["Forms & templates","Frequently used practice forms and templates."],clinical:["Clinical protocols","Assessment and management guidance."],policies:["Practice policies","Underlying governance documents."],admin:["Administrative protocols & common queries","Operational workflows and practical how-to guidance."]};
+ const [title,sub]=map[id]; renderList(title,sub,resources.filter(r=>r.cat===id));
+}
+function renderHome(){
+ document.getElementById("app").innerHTML=`<section class="hero"><div class="eyebrow">Good ${new Date().getHours()<12?"morning":new Date().getHours()<18?"afternoon":"evening"}</div><h1>Find the right document or answer without hunting through folders.</h1><p class="lead">Bradley’s Practice · Mold &amp; Buckley</p></section>
+ <div class="search-wrap"><h3>Search the whole Staff Hub</h3><p class="muted">Find any form, protocol, policy or operational answer.</p><div class="search-row"><input id="searchBox" placeholder="e.g. patient can't use link, hospital wants bloods, home visit…" onkeydown="if(event.key==='Enter')runSearch()"><button class="btn" onclick="runSearch()">Search</button></div><div id="searchResults" class="search-results"></div></div>
+ <div class="shortcut"><div><div class="eyebrow">Reception shortcut</div><h2 style="margin:3px 0">What does the patient need help with?</h2><p>Use this when helping a patient with a query. Start here for quick, problem-based answers.</p></div><button class="btn teal" onclick="showPage('reception')">Open the Reception Guide</button></div>
+ <h2>Staff Hub</h2><div class="grid">${[
+ ["reception","R","Reception Guide","Problem-based operational answers"],
+ ["clinical","C","Clinical protocols","Assessment and management guidance"],
+ ["admin","A","Administrative protocols","Operational workflows and common queries"],
+ ["forms","F","Forms & templates","Frequently used practice forms"],
+ ["policies","P","Practice policies","Underlying governance documents"],
+ ["contacts","☎","Contacts & escalation","Who to contact and when"]
+ ].map(x=>`<div class="card click" onclick="showPage('${x[0]}')"><div class="icon">${x[1]}</div><h3>${x[2]}</h3><p>${x[3]}</p></div>`).join("")}</div>
+ <div class="section-head"><div><h2>Frequently used</h2><p class="muted">Owners and review dates shown on every item</p></div></div><div class="grid two">${resources.slice(0,8).map(resourceCard).join("")}</div>`;
+}
+function runSearch(){
+ const q=document.getElementById("searchBox").value, rs=search(q), el=document.getElementById("searchResults");
+ el.innerHTML=rs.length?rs.map(r=>`<div class="result" onclick="openResource('${r.id}')"><b>${r.title}</b><div class="muted">${r.desc}</div></div>`).join(""):`<div class="empty"><b>Can’t find what you need?</b><p>Try another search or tell us what guidance is missing.</p><a class="btn teal" target="_blank" rel="noopener" href="${FORM_URL}">Tell us what’s missing</a></div>`;
+}
+function renderReception(){
+ document.getElementById("app").innerHTML=`<button class="back" onclick="showPage('home')">← Home</button><div class="hero"><div class="eyebrow">Reception Guide</div><h1>What does the patient need help with?</h1><p class="lead">Choose the problem you are dealing with. You do not need to know which policy contains the answer.</p></div>
+ <div class="grid">${receptionTopics.map(([t,id])=>`<div class="card click" onclick="openResource('${id}')"><h3>${t}</h3><p>${resources.find(r=>r.id===id)?.desc||""}</p></div>`).join("")}</div>
+ <div class="feedback"><h3>Can’t find the answer?</h3><p>Have you searched the Staff Hub but couldn’t find the answer you needed? Tell us what you were looking for. This helps identify new guidance that needs to be added.</p><a class="btn teal" href="${FORM_URL}" target="_blank" rel="noopener">Tell us what’s missing</a></div>`;
+}
+function renderList(title,sub,list){
+ document.getElementById("app").innerHTML=`<button class="back" onclick="showPage('home')">← Home</button><div class="hero"><h1>${title}</h1><p class="lead">${sub}</p></div><div class="grid two">${list.length?list.map(resourceCard).join(""):`<div class="card"><p>No resources are currently surfaced in this section.</p></div>`}</div>${feedback()}`;
+}
+function openResource(id){
+ const r=resources.find(x=>x.id===id); if(!r)return;
+ setNav(r.cat);
+ document.getElementById("app").innerHTML=`<button class="back" onclick="showPage('${r.cat==='contacts'?'contacts':r.cat}')">← Back</button>
+ <div class="protocol-head"><div class="eyebrow">${r.type}</div><h1>${r.title}</h1><p class="lead">${r.desc}</p><div class="gov"><div><b>Owner</b>${r.owner}</div><div><b>Last reviewed</b>Review date required</div><div><b>Next review</b>${r.review}</div><div><b>Source</b>Current approved practice document</div></div></div>
+ <section>${detail[id]||`<div class="callout warn"><b>Approved source required.</b> This resource is indexed in the Staff Hub, but its full operational content is not reproduced in this standalone export because the available source does not safely support additional detail.</div>`}</section>
+ ${related(id)}${feedback()}<div class="feedback"><h3>Something missing or out of date?</h3><p>Found something missing, unclear or out of date? Let us know so we can improve the Staff Hub.</p><a class="btn teal" href="${FORM_URL}" target="_blank" rel="noopener">Suggest an update</a></div>`;
+ window.scrollTo(0,0);
+}
+function related(id){
+ const rel={homevisit:["duty"],duty:["homevisit"],medlink:["meds"],meds:["medlink"],secondary:["meds"],access:["homevisit","duty"],skin:[]}[id]||[];
+ return rel.length?`<h2>Related guidance</h2><div class="grid two">${rel.map(x=>resourceCard(resources.find(r=>r.id===x))).join("")}</div>`:"";
+}
+document.getElementById("nav").innerHTML=navItems.map(([id,t])=>`<button data-id="${id}" onclick="showPage('${id}')">${t}</button>`).join("");
+showPage("home");
+</script>
+</body>
+</html>
