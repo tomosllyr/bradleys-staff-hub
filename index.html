@@ -232,7 +232,7 @@ function related(id){
  return rel.length?`<h2>Related guidance</h2><div class="grid two">${rel.map(x=>resourceCard(resources.find(r=>r.id===x))).join("")}</div>`:"";
 }
 document.getElementById("nav").innerHTML=navItems.map(([id,t])=>`<button data-id="${id}" onclick="showPage('${id}')">${t}</button>`).join("");
-showPage("home");
+showPage("home");Access Denied
 </script>
 </body>
 </html>
