@@ -232,9 +232,7 @@ function related(id){
  return rel.length?`<h2>Related guidance</h2><div class="grid two">${rel.map(x=>resourceCard(resources.find(r=>r.id===x))).join("")}</div>`:"";
 }
 document.getElementById("nav").innerHTML=navItems.map(([id,t])=>`<button data-id="${id}" onclick="showPage('${id}')">${t}</button>`).join("");
-const password = prompt("Enter Bradley's Practice Staff Password"); if (password === "bradstaff") { showPage("home"); } else { document.body.innerHTML = "
-Access Denied
-"; }
+const password = prompt("Enter Bradley's Practice Staff Password"); if (password === "bradstaff") { showPage("home"); } else { document.body.innerHTML = "<h1>Access Denied</h1>"; }
 </script>
 </body>
 </html>
